@@ -1,0 +1,38 @@
+.banner {
+  position: relative;
+  height: 620px;
+  background-image: url('https://blog-1304088100.cos.ap-nanjing.myqcloud.com/blog-images%2Fbg.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  .person {
+    position: absolute;
+    height: 140px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .avatar {
+      position:absolute;
+      top:-30px;
+      left: 10px;
+      width: 150px;
+      height: 150px;
+      border-radius: 12px;
+    }
+
+    .title{
+      margin-top: 10px;
+      margin-left: 180px;
+      line-height: 50px;
+      font-size: 30px;
+      color:#000;
+    }
+    .desc{
+      margin-left: 180px;
+      line-height: 36px;
+      font-size: 16px;
+      color: #444;
+    }
+  }
+}
