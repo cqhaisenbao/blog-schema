@@ -4,6 +4,9 @@ interface ChildrenItem {
   id: number;
   name: Children;
   attributes: {
+    title?: string;
+    description?: string;
+    avatar?: string;
     [key: string]: any;
   };
 }
