@@ -1,11 +1,11 @@
 import styles from './style.module.scss';
 
 const imageList = [
-    'https://blog-1304088100.cos.ap-nanjing.myqcloud.com/blog-images%2F1.jpg',
-    'https://blog-1304088100.cos.ap-nanjing.myqcloud.com/blog-images%2F2.jpg',
+    'https://blog-1304088100.cos.ap-nanjing.myqcloud.com/blog-images%2F7.jpg',
+    'https://blog-1304088100.cos.ap-nanjing.myqcloud.com/blog-images%2F6.jpg',
     'https://blog-1304088100.cos.ap-nanjing.myqcloud.com/blog-images%2F3.jpg',
     'https://blog-1304088100.cos.ap-nanjing.myqcloud.com/blog-images%2F4.jpg',
-    'https://blog-1304088100.cos.ap-nanjing.myqcloud.com/blog-images%2F5.jpg'
+    'https://blog-1304088100.cos.ap-nanjing.myqcloud.com/blog-images%2F8.jpg'
 ]
 
 const List = () => {
