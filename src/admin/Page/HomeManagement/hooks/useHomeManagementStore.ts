@@ -3,6 +3,7 @@ import { ManagementState } from "../store/reducer";
 import {
   getAddPageChildrenAction,
   getDeletePageChildrenAction,
+  getResetSchemaAction,
 } from "../store/action";
 
 const useHomeManagementStore = () => {
@@ -17,10 +18,13 @@ const useHomeManagementStore = () => {
   const deletePageChildren = (id: number) =>
     dispatch(getDeletePageChildrenAction({ id }));
 
+  const resetSchema = () => dispatch(getResetSchemaAction());
+
   return {
     schema,
     addPageChildren,
     deletePageChildren,
+    resetSchema,
   };
 };
 

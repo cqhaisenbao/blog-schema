@@ -1,8 +1,18 @@
-import { ADD_PAGE_CHILDREN, DELETE_PAGE_CHILDREN } from "./constant";
+import {
+  ADD_PAGE_CHILDREN,
+  DELETE_PAGE_CHILDREN,
+  RESET_SCHEMA,
+} from "./constant";
 
 const getAddPageChildrenAction = () => {
   return {
     type: ADD_PAGE_CHILDREN,
+  };
+};
+
+const getResetSchemaAction = () => {
+  return {
+    type: RESET_SCHEMA,
   };
 };
 
@@ -13,4 +23,8 @@ const getDeletePageChildrenAction = (payload: { id: number }) => {
   };
 };
 
-export { getAddPageChildrenAction, getDeletePageChildrenAction };
+export {
+  getAddPageChildrenAction,
+  getDeletePageChildrenAction,
+  getResetSchemaAction,
+};

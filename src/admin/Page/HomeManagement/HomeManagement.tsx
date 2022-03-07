@@ -15,7 +15,7 @@ import { parseJsonByString } from "../../../common/utils";
 const { Header, Sider, Content } = Layout;
 
 const Home = () => {
-  const { schema } = useHomeManagementStore();
+  const { schema, resetSchema } = useHomeManagementStore();
   const { collapsed, toggle } = useCollapsed();
 
   const checkEdited = () => {
@@ -61,6 +61,9 @@ const Home = () => {
           <Space className={styles.save}>
             <Button type="primary" onClick={saveSchema}>
               保存区块配置
+            </Button>
+            <Button danger ghost type="primary" onClick={resetSchema}>
+              重置区块配置
             </Button>
           </Space>
         </Content>
