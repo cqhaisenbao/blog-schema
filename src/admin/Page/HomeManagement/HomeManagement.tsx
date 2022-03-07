@@ -1,4 +1,5 @@
 import { Layout, Menu } from "antd";
+import { useSelector } from "react-redux";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -11,6 +12,8 @@ import useCollapsed from "./hooks/useCollapsed";
 const { Header, Sider, Content } = Layout;
 
 const Home = () => {
+  const x = useSelector((state) => state);
+  console.log(x);
   const { collapsed, toggle } = useCollapsed();
 
   return (
