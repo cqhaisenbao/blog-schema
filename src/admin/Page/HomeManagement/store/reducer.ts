@@ -27,7 +27,6 @@ const reducer = (state = defaultState, action: Action) =>
     const { type, payload } = action;
     switch (type) {
       case ADD_PAGE_CHILDREN:
-        console.log(type);
         draft.schema.children.push({
           id: Number(Math.random().toFixed(6)) * 1000000,
           attributes: {},

@@ -1,17 +1,8 @@
 import { Button, Divider } from "antd";
-import { useDispatch } from "react-redux";
 import useHomeManagementStore from "../../hooks/useHomeManagementStore";
-import { ADD_PAGE_CHILDREN } from "../../store/constant";
 
 const AreaList = () => {
-  const dispatch = useDispatch();
-  const { schema } = useHomeManagementStore();
-
-  const addPageChildren = () => {
-    dispatch({
-      type: ADD_PAGE_CHILDREN,
-    });
-  };
+  const { schema, addPageChildren } = useHomeManagementStore();
 
   return (
     <div>
