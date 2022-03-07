@@ -1,4 +1,4 @@
-import { Layout, Menu, Space } from "antd";
+import { Button, Layout, Menu, message, Space } from "antd";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -8,11 +8,29 @@ import {
 import styles from "./style.module.scss";
 import useCollapsed from "./hooks/useCollapsed";
 import AreaList from "./component/AreaList/AreaList";
+import useHomeManagementStore from "./hooks/useHomeManagementStore";
+import _ from "lodash";
+import { parseJsonByString } from "../../../common/utils";
 
 const { Header, Sider, Content } = Layout;
 
 const Home = () => {
+  const { schema } = useHomeManagementStore();
   const { collapsed, toggle } = useCollapsed();
+
+  const checkEdited = () => {
+    const localSchema = parseJsonByString("schema", {});
+    return !_.isEqual(localSchema, schema);
+  };
+
+  const saveSchema = async () => {
+    if (checkEdited()) {
+      localStorage.setItem("schema", JSON.stringify(schema));
+      message.success("保存成功");
+    } else {
+      message.error("当前未修改数据");
+    }
+  };
 
   return (
     <Layout>
@@ -39,8 +57,11 @@ const Home = () => {
           )}
         </Header>
         <Content className={styles.content}>
+          <AreaList />
           <Space className={styles.save}>
-            <AreaList />
+            <Button type="primary" onClick={saveSchema}>
+              保存区块配置
+            </Button>
           </Space>
         </Content>
       </Layout>
