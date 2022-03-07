@@ -1,15 +1,10 @@
-import { produce } from "immer";
 import { parseJsonByString } from "../../../../common/utils";
 
-type HomeManagementActionType =
-  | "RESET_SCHEMA"
-  | "ADD_PAGE_CHILDREN"
-  | "CHANGE_PAGE_CHILDREN"
-  | "DELETE_PAGE_CHILDREN"
-  | "SORT_PAGE_CHILDREN";
+import { ADD_PAGE_CHILDREN } from "./constant";
+import produce from "immer";
 
 type Action = {
-  type: HomeManagementActionType;
+  type: string;
   payload: any;
 };
 
@@ -27,16 +22,20 @@ const defaultState: ManagementState = {
   schema: initialSchema,
 };
 
-const reducer = (state = defaultState, action: Action) => {
-  const { type, payload } = action;
-  switch (type) {
-    case "ADD_PAGE_CHILDREN":
-      return produce(state, (draft) => {
-        draft.schema.children.push(payload);
-      });
-    default:
-      return state;
-  }
-};
+const reducer = (state = defaultState, action: Action) =>
+  produce(state, (draft) => {
+    const { type, payload } = action;
+    switch (type) {
+      case ADD_PAGE_CHILDREN:
+        console.log(type);
+        draft.schema.children.push({
+          id: Number(Math.random().toFixed(6)) * 1000000,
+          attributes: {},
+        });
+        break;
+      default:
+        break;
+    }
+  });
 
 export default reducer;

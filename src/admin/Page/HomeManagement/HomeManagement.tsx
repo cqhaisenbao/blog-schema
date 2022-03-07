@@ -1,5 +1,4 @@
-import { Layout, Menu } from "antd";
-import { useSelector } from "react-redux";
+import { Layout, Menu, Space } from "antd";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -8,16 +7,11 @@ import {
 } from "@ant-design/icons";
 import styles from "./style.module.scss";
 import useCollapsed from "./hooks/useCollapsed";
-import { ManagementState } from "./store/reducer";
+import AreaList from "./component/AreaList/AreaList";
 
 const { Header, Sider, Content } = Layout;
 
 const Home = () => {
-  const { schema } = useSelector<
-    { homeManagement: ManagementState },
-    ManagementState
-  >((state) => state.homeManagement);
-  console.log(schema);
   const { collapsed, toggle } = useCollapsed();
 
   return (
@@ -44,7 +38,11 @@ const Home = () => {
             <MenuFoldOutlined className={styles.trigger} onClick={toggle} />
           )}
         </Header>
-        <Content className={styles.content}>123</Content>
+        <Content className={styles.content}>
+          <Space className={styles.save}>
+            <AreaList />
+          </Space>
+        </Content>
       </Layout>
     </Layout>
   );
