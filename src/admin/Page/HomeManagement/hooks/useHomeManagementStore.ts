@@ -1,6 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { ManagementState } from "../store/reducer";
-import { getAddPageChildrenAction } from "../store/action";
+import {
+  getAddPageChildrenAction,
+  getDeletePageChildrenAction,
+} from "../store/action";
 
 const useHomeManagementStore = () => {
   const dispatch = useDispatch();
@@ -11,9 +14,13 @@ const useHomeManagementStore = () => {
 
   const addPageChildren = () => dispatch(getAddPageChildrenAction());
 
+  const deletePageChildren = (id: number) =>
+    dispatch(getDeletePageChildrenAction({ id }));
+
   return {
     schema,
     addPageChildren,
+    deletePageChildren,
   };
 };
 

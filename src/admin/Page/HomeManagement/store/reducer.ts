@@ -1,6 +1,6 @@
 import { parseJsonByString } from "../../../../common/utils";
 
-import { ADD_PAGE_CHILDREN } from "./constant";
+import { ADD_PAGE_CHILDREN, DELETE_PAGE_CHILDREN } from "./constant";
 import produce from "immer";
 
 type Action = {
@@ -31,6 +31,12 @@ const reducer = (state = defaultState, action: Action) =>
           id: Number(Math.random().toFixed(6)) * 1000000,
           attributes: {},
         });
+        break;
+      case DELETE_PAGE_CHILDREN:
+        const { id } = payload;
+        draft.schema.children = draft.schema.children.filter(
+          (item) => item.id !== id
+        );
         break;
       default:
         break;
