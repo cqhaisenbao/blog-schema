@@ -8,12 +8,16 @@ import {
 } from "@ant-design/icons";
 import styles from "./style.module.scss";
 import useCollapsed from "./hooks/useCollapsed";
+import { ManagementState } from "./store/reducer";
 
 const { Header, Sider, Content } = Layout;
 
 const Home = () => {
-  const x = useSelector((state) => state);
-  console.log(x);
+  const { schema } = useSelector<
+    { homeManagement: ManagementState },
+    ManagementState
+  >((state) => state.homeManagement);
+  console.log(schema);
   const { collapsed, toggle } = useCollapsed();
 
   return (
