@@ -5,6 +5,7 @@ import {
   getChangePageChildrenAction,
   getDeletePageChildrenAction,
   getResetSchemaAction,
+  getSortPageChildrenAction,
 } from "../store/action";
 
 const useHomeManagementStore = () => {
@@ -24,12 +25,16 @@ const useHomeManagementStore = () => {
   const changePageChildren = (payload: any) =>
     dispatch(getChangePageChildrenAction(payload));
 
+  const sortPageChildren = (payload: any) =>
+    dispatch(getSortPageChildrenAction(payload));
+
   return {
     schema,
     addPageChildren,
     deletePageChildren,
     resetSchema,
     changePageChildren,
+    sortPageChildren,
   };
 };
 

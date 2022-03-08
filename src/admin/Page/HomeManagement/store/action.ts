@@ -3,6 +3,7 @@ import {
   CHANGE_PAGE_CHILDREN,
   DELETE_PAGE_CHILDREN,
   RESET_SCHEMA,
+  SORT_PAGE_CHILDREN,
 } from "./constant";
 
 const getAddPageChildrenAction = () => {
@@ -31,9 +32,17 @@ const getChangePageChildrenAction = (payload: any) => {
   };
 };
 
+const getSortPageChildrenAction = (payload: any) => {
+  return {
+    type: SORT_PAGE_CHILDREN,
+    payload,
+  };
+};
+
 export {
   getAddPageChildrenAction,
   getDeletePageChildrenAction,
   getResetSchemaAction,
   getChangePageChildrenAction,
+  getSortPageChildrenAction,
 };

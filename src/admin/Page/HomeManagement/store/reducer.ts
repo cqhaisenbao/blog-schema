@@ -5,6 +5,7 @@ import {
   DELETE_PAGE_CHILDREN,
   RESET_SCHEMA,
   CHANGE_PAGE_CHILDREN,
+  SORT_PAGE_CHILDREN,
 } from "./constant";
 import produce from "immer";
 
@@ -51,6 +52,14 @@ const reducer = (state = defaultState, action: Action) =>
           (item) => item.id === payload.id
         );
         draft.schema.children[changeIndex] = payload;
+        break;
+      case SORT_PAGE_CHILDREN:
+        const { oldIndex, newIndex } = payload;
+        draft.schema.children.splice(
+          newIndex,
+          0,
+          draft.schema.children.splice(oldIndex, 1)[0]
+        );
         break;
       default:
         break;

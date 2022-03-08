@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { SortableElement } from "react-sortable-hoc";
 import styles from "./style.module.scss";
 import { Button, Modal, Form, Select } from "antd";
 import useHomeManagementStore from "../../hooks/useHomeManagementStore";
@@ -89,4 +90,4 @@ const AreaListItem: React.FC<Props> = ({ item }) => {
   );
 };
 
-export default AreaListItem;
+export default SortableElement(AreaListItem);
