@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { SortableElement } from "react-sortable-hoc";
 import styles from "./style.module.scss";
 import { Button, Modal, Form, Select } from "antd";
 import useHomeManagementStore from "../../hooks/useHomeManagementStore";
 import { useForm } from "antd/es/form/Form";
 import { BannerForm } from "../Form";
+import { useUpdateEffect } from "ahooks";
 
 const { Item } = Form;
 
@@ -42,8 +43,7 @@ const AreaListItem: React.FC<Props> = ({ item }) => {
     setVisible(false);
   };
 
-  useEffect(() => {
-    console.log(item);
+  useUpdateEffect(() => {
     form.setFieldsValue(item);
     setCurrentSelectedType(item.name);
   }, [visible, item]);
@@ -78,6 +78,7 @@ const AreaListItem: React.FC<Props> = ({ item }) => {
       </li>
       {visible && (
         <Modal
+          getContainer={false}
           destroyOnClose={true}
           onOk={okHandle}
           onCancel={cancelHandle}
