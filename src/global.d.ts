@@ -8,7 +8,7 @@ interface ChildrenItem {
   attributes?: {
     title?: string;
     description?: string;
-    avatar?: string;
+    avatarUrl?: string;
     [key: string]: any;
   };
 }

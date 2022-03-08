@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SortableElement } from "react-sortable-hoc";
 import styles from "./style.module.scss";
 import { Button, Modal, Form, Select } from "antd";
@@ -42,6 +42,16 @@ const AreaListItem: React.FC<Props> = ({ item }) => {
     setVisible(false);
   };
 
+  useEffect(() => {
+    console.log(item);
+    form.setFieldsValue(item);
+    setCurrentSelectedType(item.name);
+  }, [visible, item]);
+
+  const cancelHandle = () => {
+    setVisible(false);
+  };
+
   const renderForm = () => {
     if (!currentSelectedType) return null;
     const FormComponent = TypeMap[currentSelectedType];
@@ -66,26 +76,28 @@ const AreaListItem: React.FC<Props> = ({ item }) => {
           编辑
         </Button>
       </li>
-      <Modal
-        destroyOnClose={true}
-        onOk={okHandle}
-        onCancel={() => setVisible(false)}
-        visible={visible}
-        title="编辑区块内容"
-      >
-        <Form preserve={false} initialValues={item} form={form}>
-          <Item label={"组件类型"} name="name">
-            <Select onChange={setCurrentSelectedType}>
-              {Object.keys(SELECT_OPTIONS).map((key) => (
-                <Select.Option key={key} value={key}>
-                  {(SELECT_OPTIONS as any)[key]}
-                </Select.Option>
-              ))}
-            </Select>
-          </Item>
-          {renderForm()}
-        </Form>
-      </Modal>
+      {visible && (
+        <Modal
+          destroyOnClose={true}
+          onOk={okHandle}
+          onCancel={cancelHandle}
+          visible={visible}
+          title="编辑区块内容"
+        >
+          <Form form={form}>
+            <Item label={"组件类型"} name="name">
+              <Select onChange={(e) => setCurrentSelectedType(e as any)}>
+                {Object.keys(SELECT_OPTIONS).map((key) => (
+                  <Select.Option key={key} value={key}>
+                    {(SELECT_OPTIONS as any)[key]}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Item>
+            {renderForm()}
+          </Form>
+        </Modal>
+      )}
     </>
   );
 };
