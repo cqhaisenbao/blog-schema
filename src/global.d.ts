@@ -1,10 +1,10 @@
 declare module "*.scss";
 
-type Children = "Banner" | "Footer" | "List";
+type ChildrenName = "Banner" | "Footer" | "List";
 
 interface ChildrenItem {
   id: number;
-  name?: Children;
+  name?: ChildrenName;
   attributes?: {
     title?: string;
     description?: string;
