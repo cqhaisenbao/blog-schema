@@ -1,4 +1,5 @@
 import {
+  ADD_LIST_CHILDREN,
   ADD_PAGE_CHILDREN,
   CHANGE_PAGE_CHILDREN,
   DELETE_PAGE_CHILDREN,
@@ -39,10 +40,18 @@ const getSortPageChildrenAction = (payload: any) => {
   };
 };
 
+const getAddListChildrenAction = (payload: any) => {
+  return {
+    type: ADD_LIST_CHILDREN,
+    payload,
+  };
+};
+
 export {
   getAddPageChildrenAction,
   getDeletePageChildrenAction,
   getResetSchemaAction,
   getChangePageChildrenAction,
   getSortPageChildrenAction,
+  getAddListChildrenAction,
 };

@@ -9,8 +9,10 @@ interface ChildrenItem {
     title?: string;
     description?: string;
     avatarUrl?: string;
+    link?: string;
     [key: string]: any;
   };
+  children?: ChildrenItem[];
 }
 
 interface PageSchema {

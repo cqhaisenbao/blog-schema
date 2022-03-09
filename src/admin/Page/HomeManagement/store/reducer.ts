@@ -6,6 +6,7 @@ import {
   RESET_SCHEMA,
   CHANGE_PAGE_CHILDREN,
   SORT_PAGE_CHILDREN,
+  ADD_LIST_CHILDREN,
 } from "./constant";
 import produce from "immer";
 
@@ -60,6 +61,19 @@ const reducer = (state = defaultState, action: Action) =>
           0,
           draft.schema.children.splice(oldIndex, 1)[0]
         );
+        break;
+      case ADD_LIST_CHILDREN:
+        const index = draft.schema.children.findIndex(
+          (item) => item.id === payload.id
+        );
+        const newChildren = {
+          id: Number(Math.random().toFixed(6)) * 1000000,
+          attributes: {},
+        };
+        draft.schema.children[index].children = [
+          ...(draft.schema.children[index].children || []),
+          newChildren,
+        ];
         break;
       default:
         break;

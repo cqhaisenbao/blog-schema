@@ -4,7 +4,7 @@ import styles from "./style.module.scss";
 import { Button, Modal, Form, Select } from "antd";
 import useHomeManagementStore from "../../hooks/useHomeManagementStore";
 import { useForm } from "antd/es/form/Form";
-import { BannerForm } from "../Form";
+import { BannerForm, ListForm } from "../Form";
 import { useUpdateEffect } from "ahooks";
 
 const { Item } = Form;
@@ -15,9 +15,11 @@ const SELECT_OPTIONS = {
   Footer: "Footer 组件",
 };
 
-const TypeMap: Partial<Record<ChildrenName, () => JSX.Element>> = {
-  Banner: BannerForm,
-};
+const TypeMap: Partial<Record<ChildrenName, React.FC<{ item: ChildrenItem }>>> =
+  {
+    Banner: BannerForm,
+    List: ListForm,
+  };
 
 interface Props {
   item: ChildrenItem;
@@ -55,7 +57,7 @@ const AreaListItem: React.FC<Props> = ({ item }) => {
   const renderForm = () => {
     if (!currentSelectedType) return null;
     const FormComponent = TypeMap[currentSelectedType];
-    return FormComponent ? <FormComponent /> : null;
+    return FormComponent ? <FormComponent item={item} /> : null;
   };
 
   return (
