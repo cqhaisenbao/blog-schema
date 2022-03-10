@@ -1,10 +1,12 @@
 import React from "react";
 import { Layout, Menu } from "antd";
+import { Link } from "react-router-dom";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
   VideoCameraOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
 import useCollapsed from "../Page/HomeManagement/hooks/useCollapsed";
 import styles from "./style.module.scss";
@@ -20,7 +22,10 @@ const BaseLayout: React.FC = ({ children }) => {
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={["admin-home"]}>
             <Menu.Item key="admin-home" icon={<UserOutlined />}>
-              首页内容管理
+              <Link to="/">首页内容管理</Link>
+            </Menu.Item>
+            <Menu.Item key="admin-setting" icon={<SettingOutlined />}>
+              <Link to="/setting">系统设置</Link>
             </Menu.Item>
             <Menu.Item
               key="admin-back"
