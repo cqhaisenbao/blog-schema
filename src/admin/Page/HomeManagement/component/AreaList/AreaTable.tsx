@@ -1,29 +1,10 @@
-import { Button, Card, message, Space, Table } from "antd";
+import { Button, Space, Table } from "antd";
 import useHomeManagementStore from "../../hooks/useHomeManagementStore";
 import { ColumnsType } from "antd/es/table";
-import React, { useEffect, useState } from "react";
-import { parseJsonByString } from "../../../../../common/utils";
-import _ from "lodash";
 
 const AreaListTable = () => {
-  const localSchema = parseJsonByString("schema", {});
-  const [isEdited, setIsEdited] = useState(false);
-  const { schema, addPageChildren, resetSchema, deletePageChildren } =
-    useHomeManagementStore();
+  const { schema, deletePageChildren } = useHomeManagementStore();
   const { children = [] } = schema;
-
-  const checkEdited = () => {
-    return !_.isEqual(localSchema, schema);
-  };
-
-  useEffect(() => {
-    setIsEdited(checkEdited());
-  }, [schema]);
-
-  const saveSchema = async () => {
-    localStorage.setItem("schema", JSON.stringify(schema));
-    message.success("保存成功");
-  };
 
   const deleteHandler = (record: any) => {
     deletePageChildren(record.id);
@@ -79,19 +60,6 @@ const AreaListTable = () => {
 
   return (
     <>
-      <Card style={{ marginBottom: "10px", textAlign: "end" }}>
-        <Space>
-          <Button type="primary" ghost onClick={addPageChildren}>
-            新增页面区块
-          </Button>
-          <Button disabled={!isEdited} type="primary" onClick={saveSchema}>
-            保存区块配置
-          </Button>
-          <Button danger ghost type="primary" onClick={resetSchema}>
-            重置区块配置
-          </Button>
-        </Space>
-      </Card>
       <Table bordered rowKey="id" columns={columns} dataSource={children} />
     </>
   );

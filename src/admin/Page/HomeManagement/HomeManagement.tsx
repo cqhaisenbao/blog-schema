@@ -1,76 +1,45 @@
-import { Button, Layout, Menu, message, Space } from "antd";
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
-import styles from "./style.module.scss";
-import useCollapsed from "./hooks/useCollapsed";
-import AreaList from "./component/AreaList/AreaList";
 import useHomeManagementStore from "./hooks/useHomeManagementStore";
+import AreaListTable from "./component/AreaList/AreaTable";
+import React, { useEffect, useState } from "react";
+import { Button, Card, message, Space } from "antd";
 import _ from "lodash";
 import { parseJsonByString } from "../../../common/utils";
-import AreaListTable from "./component/AreaList/AreaTable";
-
-const { Header, Sider, Content } = Layout;
 
 const Home = () => {
-  const { schema, resetSchema } = useHomeManagementStore();
-  const { collapsed, toggle } = useCollapsed();
+  const { schema, resetSchema, addPageChildren } = useHomeManagementStore();
+  const [isEdited, setIsEdited] = useState(false);
+  const localSchema = parseJsonByString("schema", {});
 
-  // const checkEdited = () => {
-  //   const localSchema = parseJsonByString("schema", {});
-  //   return !_.isEqual(localSchema, schema);
-  // };
-  //
-  // const saveSchema = async () => {
-  //   if (checkEdited()) {
-  //     localStorage.setItem("schema", JSON.stringify(schema));
-  //     message.success("保存成功");
-  //   } else {
-  //     message.error("当前未修改数据");
-  //   }
-  // };
+  const checkEdited = () => {
+    return !_.isEqual(localSchema, schema);
+  };
+
+  useEffect(() => {
+    setIsEdited(checkEdited());
+  }, [schema]);
+
+  const saveSchema = async () => {
+    localStorage.setItem("schema", JSON.stringify(schema));
+    message.success("保存成功");
+  };
 
   return (
-    <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={["admin-home"]}>
-          <Menu.Item key="admin-home" icon={<UserOutlined />}>
-            首页内容管理
-          </Menu.Item>
-          <Menu.Item
-            key="admin-back"
-            onClick={() => (window.location.href = "/")}
-            icon={<VideoCameraOutlined />}
-          >
-            返回用户页面
-          </Menu.Item>
-        </Menu>
-      </Sider>
-      <Layout>
-        <Header className={styles.header}>
-          {collapsed ? (
-            <MenuUnfoldOutlined className={styles.trigger} onClick={toggle} />
-          ) : (
-            <MenuFoldOutlined className={styles.trigger} onClick={toggle} />
-          )}
-        </Header>
-        <Content className={styles.content}>
-          {/*<AreaList />*/}
-          <AreaListTable />
-          {/*<Space className={styles.save}>*/}
-          {/*  <Button type="primary" onClick={saveSchema}>*/}
-          {/*    保存区块配置*/}
-          {/*  </Button>*/}
-          {/*  <Button danger ghost type="primary" onClick={resetSchema}>*/}
-          {/*    重置区块配置*/}
-          {/*  </Button>*/}
-          {/*</Space>*/}
-        </Content>
-      </Layout>
-    </Layout>
+    <>
+      <Card style={{ marginBottom: "10px", textAlign: "end" }}>
+        <Space>
+          <Button type="primary" ghost onClick={addPageChildren}>
+            新增页面区块
+          </Button>
+          <Button disabled={!isEdited} type="primary" onClick={saveSchema}>
+            保存区块配置
+          </Button>
+          <Button danger ghost type="primary" onClick={resetSchema}>
+            重置区块配置
+          </Button>
+        </Space>
+      </Card>
+      <AreaListTable />
+    </>
   );
 };
 
