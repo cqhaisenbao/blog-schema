@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout, Menu } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -20,11 +20,15 @@ const BaseLayout: React.FC = ({ children }) => {
     <div>
       <Layout>
         <Sider trigger={null} collapsible collapsed={collapsed}>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={["admin-home"]}>
-            <Menu.Item key="admin-home" icon={<HomeOutlined />}>
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={[useLocation().pathname]}
+          >
+            <Menu.Item key="/" icon={<HomeOutlined />}>
               <Link to="/">首页内容管理</Link>
             </Menu.Item>
-            <Menu.Item key="admin-setting" icon={<SettingOutlined />}>
+            <Menu.Item key="/setting" icon={<SettingOutlined />}>
               <Link to="/setting">系统设置</Link>
             </Menu.Item>
             <Menu.Item
